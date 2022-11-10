@@ -20,6 +20,17 @@
 
 
 ## Introduction
+Clone the repository recursively:
+git clone --recurse-submodules https://github.com/mikel-brostrom/Yolov5_DeepSort_Pytorch.git
+
+If you already cloned and forgot to use --recurse-submodules you can run git submodule update --init
+
+Move and replace datasets.py to recursively downloaded yolov5>utils>datasets.py
+Move and replace loss.py to recursively downloaded yolov5>utils>loss.py
+
+
+
+#To run yoloStream
 
 To run yoloStream: python3 yoloStream.py --yolo_model ./yolov5/best_V3_720p.pt --show-vid --img 640
 
