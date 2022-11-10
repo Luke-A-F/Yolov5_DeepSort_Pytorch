@@ -29,6 +29,8 @@ Move and replace datasets.py to recursively downloaded yolov5>utils>datasets.py
 Move and replace loss.py to recursively downloaded yolov5>utils>loss.py
 
 
+#Train in yolov5 folder
+Run python3 train.py --img 640 --batch 32 --epoch 100 --data blimpLearn.yaml --weights yolov5s.pt
 
 #To run yoloStream
 
