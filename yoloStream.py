@@ -336,6 +336,9 @@ def detect(opt):
 
                 # draw boxes for visualization
                 if len(outputs) > 0:
+
+                    infoToSendfromYoloInTheWonderfulJSONFormat = []
+
                     for j, (output, conf) in enumerate(zip(outputs, confs)):
 
                         bboxes = output[0:4]
@@ -356,18 +359,19 @@ def detect(opt):
                         # UDPSendMessage(clientAddr,id,c,xCenter,yCenter,radius,width*height,conf,bufferSize,clientDataTime)
                         # print("UDP Sent")
                         print(type(conf))
-                        infoToSendfromYolo = {"class":c,"ID":float(id),"xCenter":xCenter, "yCenter":yCenter,"Radius":radius, "Area": float(width*height),"Confidence":float(conf.cpu().numpy())}
+                        info = {"class":c,"ID":float(id),"xCenter":xCenter, "yCenter":yCenter,"Radius":radius, "Area": float(width*height),"Confidence":float(conf.cpu().numpy())}
+                        infoToSendfromYoloInTheWonderfulJSONFormat.append(info)
                         #,"BufferSize":bufferSize,"ClientDataTime":clientDataTime}
                         # keyIndex = ["c","xCenter","yCenter","radius","width*height","confidence","bufferSize","clientDataTime"]
                         # valuesToDict = [c,xCenter,yCenter,radius,width*height,conf.cpu(),bufferSize,clientDataTime]
                         # infoToSendfromYolo = dict.fromkeys(keyIndex,valuesToDict)
-                        for key in infoToSendfromYolo:
-                            print(key)
-                            print(type(infoToSendfromYolo[key]))
-                        print(infoToSendfromYolo["Confidence"])
+
+                        # for key in infoToSendfromYolo:
+                        #     print(key)
+                        #     print(type(infoToSendfromYolo[key]))
+
+                        print(info["Confidence"])
                         # exit()
-                        send_ack(UDPServerSocket,addr[0],addr[1],infoToSendfromYolo)
-                        print("UDP Sent")
 
                         if save_txt:
                             # to MOT format
@@ -380,6 +384,9 @@ def detect(opt):
                                 f.write(('%g ' * 10 + '\n') % (frame_idx + 1, id, bbox_left,  # MOT format
                                                                bbox_top, bbox_w, bbox_h, -1, -1, -1, -1))
 
+                    #Send the JSON-ized array of outputs back to the sender
+                    send_ack(UDPServerSocket, addr[0], addr[1], infoToSendfromYoloInTheWonderfulJSONFormat)
+                    print("UDP Sent")
                 LOGGER.info(f'{s}Done. YOLO:({t3 - t2:.3f}s), DeepSort:({t5 - t4:.3f}s)')
 
             else:
