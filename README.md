@@ -38,7 +38,10 @@ To run yoloStream: python3 yoloStream.py --yolo_model ./yolov5/best_V3_720p.pt -
 
 Replace ./yolov5/best_V3_720p.pt with the correct path for the .pt file
 
+#Run Trackers
+python3 track.py --source ../spring_2023_videos/AimForBleachers.avi --yolo_model ./best_V3_720p.pt --device cuda:0 --show-vid
 
+or the source dev id for the webcam
 ## Tutorials
 
 * [Yolov5 training on Custom Data (link to external repository)](https://github.com/ultralytics/yolov5/wiki/Train-Custom-Data)&nbsp;
