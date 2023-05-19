@@ -21,7 +21,7 @@
 
 ## Introduction
 Clone the repository recursively:
-git clone --recurse-submodules https://github.com/mikel-brostrom/Yolov5_DeepSort_Pytorch.git
+git clone --recurse-submodules https://github.com/Luke-A-F/Yolov5_DeepSort_Pytorch.git
 
 If you already cloned and forgot to use --recurse-submodules you can run git submodule update --init
 
